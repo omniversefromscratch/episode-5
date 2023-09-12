@@ -30,6 +30,9 @@ class OmniversefromscratchCoreWallsExtension(omni.ext.IExt):
         self._fr3 = 2.0
 
         self._window = ui.Window("Walls", width=300, height=300)
+        # self._stage = ui.Workspace.get_window("Stage")
+        # self._window.dock_in(self._stage, ui.DockPosition.RIGHT, 0.3)
+
         with self._window.frame:
             with ui.VStack():
 
@@ -44,25 +47,25 @@ class OmniversefromscratchCoreWallsExtension(omni.ext.IExt):
 
                 def move_right():
                     omni.kit.commands.execute('TransformMultiPrimsSRTCpp', count=1, paths=['/World/Cube'],
-                                              new_translations=[0.0, 0.0, self._z-self._deltaZ],
+                                              new_translations=[0.0, 0.0, self._z - self._deltaZ],
                                               old_translations=[0.0, 0.0, self._z])
                     self._z -= self._deltaZ
 
                 def shorten_wall():
                     omni.kit.commands.execute('TransformMultiPrimsSRTCpp', count=1, paths=['/World/Cube'],
                                               new_translations=[0.0, 0.0, self._z],
-                                              new_scales=[self._frCurrent, 1.0, self._scale * (1-self._deltaScale)],
+                                              new_scales=[self._frCurrent, 1.0, self._scale * (1 - self._deltaScale)],
                                               old_translations=[0.0, 0.0, self._z],
                                               old_scales=[self._frCurrent, 1.0, self._scale])
-                    self._scale *= (1-self._deltaScale)
+                    self._scale *= (1 - self._deltaScale)
 
                 def lengthen_wall():
                     omni.kit.commands.execute('TransformMultiPrimsSRTCpp', count=1, paths=['/World/Cube'],
                                               new_translations=[0.0, 0.0, self._z],
-                                              new_scales=[self._frCurrent, 1.0, self._scale * (1+self._deltaScale)],
+                                              new_scales=[self._frCurrent, 1.0, self._scale * (1 + self._deltaScale)],
                                               old_translations=[0.0, 0.0, self._z],
                                               old_scales=[self._frCurrent, 1.0, self._scale])
-                    self._scale *= (1+self._deltaScale)
+                    self._scale *= (1 + self._deltaScale)
 
                 def firerate_1hr():
                     omni.kit.commands.execute('TransformMultiPrimsSRTCpp', count=1, paths=['/World/Cube'],
@@ -112,6 +115,9 @@ class OmniversefromscratchCoreWallsExtension(omni.ext.IExt):
 
                 with ui.HStack():
                     ui.Button("Reset", clicked_fn=on_reset)
+        self._window.dock_in(ui.Workspace.get_window("DockSpace"), ui.DockPosition.SAME, 1.0)
+        self._window.focus()
+        self._window.visible = True
 
     def on_shutdown(self):
         print("[omniversefromscratch.core.walls] omniversefromscratch core walls shutdown")
