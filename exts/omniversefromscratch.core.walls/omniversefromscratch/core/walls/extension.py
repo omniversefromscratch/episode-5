@@ -38,53 +38,53 @@ class OmniversefromscratchCoreWallsExtension(omni.ext.IExt):
 
                 def move_left():
                     omni.kit.commands.execute('TransformMultiPrimsSRTCpp', count=1, paths=['/World/Cube'],
-                                              new_translations=[0.0, 50.0, self._z + self._deltaZ],
-                                              old_translations=[0.0, 50.0, self._z])
+                                              new_translations=[0.0, 0.0, self._z + self._deltaZ],
+                                              old_translations=[0.0, 0.0, self._z])
                     self._z += self._deltaZ
 
                 def move_right():
                     omni.kit.commands.execute('TransformMultiPrimsSRTCpp', count=1, paths=['/World/Cube'],
-                                              new_translations=[0.0, 50.0, self._z-self._deltaZ],
-                                              old_translations=[0.0, 50.0, self._z])
+                                              new_translations=[0.0, 0.0, self._z-self._deltaZ],
+                                              old_translations=[0.0, 0.0, self._z])
                     self._z -= self._deltaZ
 
                 def shorten_wall():
                     omni.kit.commands.execute('TransformMultiPrimsSRTCpp', count=1, paths=['/World/Cube'],
-                                              new_translations=[0.0, 50.0, self._z],
+                                              new_translations=[0.0, 0.0, self._z],
                                               new_scales=[self._frCurrent, 1.0, self._scale * (1-self._deltaScale)],
-                                              old_translations=[0.0, 50.0, self._z],
+                                              old_translations=[0.0, 0.0, self._z],
                                               old_scales=[self._frCurrent, 1.0, self._scale])
                     self._scale *= (1-self._deltaScale)
 
                 def lengthen_wall():
                     omni.kit.commands.execute('TransformMultiPrimsSRTCpp', count=1, paths=['/World/Cube'],
-                                              new_translations=[0.0, 50.0, self._z],
+                                              new_translations=[0.0, 0.0, self._z],
                                               new_scales=[self._frCurrent, 1.0, self._scale * (1+self._deltaScale)],
-                                              old_translations=[0.0, 50.0, self._z],
+                                              old_translations=[0.0, 0.0, self._z],
                                               old_scales=[self._frCurrent, 1.0, self._scale])
                     self._scale *= (1+self._deltaScale)
 
                 def firerate_1hr():
                     omni.kit.commands.execute('TransformMultiPrimsSRTCpp', count=1, paths=['/World/Cube'],
-                                              new_translations=[0.0, 50.0, self._z],
+                                              new_translations=[0.0, 0.0, self._z],
                                               new_scales=[self._fr1, 1.0, self._scale],
-                                              old_translations=[0.0, 50.0, self._z],
+                                              old_translations=[0.0, 0.0, self._z],
                                               old_scales=[self._frCurrent, 1.0, self._scale])
                     self._frCurrent = self._fr1
 
                 def firerate_2hr():
                     omni.kit.commands.execute('TransformMultiPrimsSRTCpp', count=1, paths=['/World/Cube'],
-                                              new_translations=[0.0, 50.0, self._z],
+                                              new_translations=[0.0, 0.0, self._z],
                                               new_scales=[self._fr2, 1.0, self._scale],
-                                              old_translations=[0.0, 50.0, self._z],
+                                              old_translations=[0.0, 0.0, self._z],
                                               old_scales=[self._frCurrent, 1.0, self._scale])
                     self._frCurrent = self._fr2
 
                 def firerate_3hr():
                     omni.kit.commands.execute('TransformMultiPrimsSRTCpp', count=1, paths=['/World/Cube'],
-                                              new_translations=[0.0, 50.0, self._z],
+                                              new_translations=[0.0, 0.0, self._z],
                                               new_scales=[self._fr3, 1.0, self._scale],
-                                              old_translations=[0.0, 50.0, self._z],
+                                              old_translations=[0.0, 0.0, self._z],
                                               old_scales=[self._frCurrent, 1.0, self._scale])
                     self._frCurrent = self._fr3
 
@@ -92,8 +92,6 @@ class OmniversefromscratchCoreWallsExtension(omni.ext.IExt):
                     omni.kit.commands.execute('DeletePrims', paths=['/World/Cube'], destructive=False)
                     self._z = 0
                     self._scale = 1.0
-
-                on_reset()
 
                 with ui.HStack():
                     ui.Button("+ New Wall", clicked_fn=new_wall)
