@@ -2,7 +2,7 @@
     "files.associations": {
         "*.kit": "toml",
     },
-    "editor.rulers": [120],
+    "editor.rulers": [],
 
     // Python modules search paths:
     "python.analysis.extraPaths": [
